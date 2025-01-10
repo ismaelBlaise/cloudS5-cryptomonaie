@@ -33,3 +33,16 @@ Route::prefix('/auth')->group(function () {
 });
 
 
+
+use App\Http\Controllers\TransactionController;
+
+Route::get('/transactions/depot', [TransactionController::class, 'depotForm'])->name('transactions.depotForm');
+Route::post('/transactions/depot', [TransactionController::class, 'depot'])->name('transactions.depot');
+
+Route::get('/transactions/vente', [TransactionController::class, 'venteForm'])->name('transactions.venteForm');
+Route::post('/transactions/vente', [TransactionController::class, 'vente'])->name('transactions.vente');
+
+Route::get('/transactions/echange', [TransactionController::class, 'echangeForm'])->name('transactions.echangeForm');
+Route::post('/transactions/echange', [TransactionController::class, 'echange'])->name('transactions.echange');
+
+

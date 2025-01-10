@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li class="p-4 hover:bg-purple-700">
-                        <a href="" class="flex items-center space-x-2">
+                        <a href="{{ route('transactions.venteForm')}}" class="flex items-center space-x-2">
                             <span class="material-icons">account_balance_wallet</span>
                             <span>Portefeuille</span>
                         </a>
@@ -70,16 +70,8 @@
 
         <!-- Contenu principal -->
         <main class="flex-1 bg-gray-100 p-6">
-            <header class="flex justify-between items-center mb-6">
-                <h1 class="text-2xl font-bold text-gray-800">Tableau de bord</h1>
-                <a href="#" class="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700">
-                    Nouvelle action
-                </a>
-            </header>
-            
-            <!-- Contenu dynamique -->
             <div>
-                @yield('content')
+                @yield('content1')
             </div>
         </main>
     </div>

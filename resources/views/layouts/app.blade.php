@@ -8,6 +8,8 @@
     <!-- Ajouter Tailwind CSS via CDN ou via Laravel Mix -->
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
     
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet">
+
     <!-- Optionnel : Ajouter vos styles CSS personnalisés -->
     <style>
         /* Personnalisation des styles ici si nécessaire */

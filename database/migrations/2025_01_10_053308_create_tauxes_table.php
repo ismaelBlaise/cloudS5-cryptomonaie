@@ -24,6 +24,6 @@ public function up()
      */
     public function down(): void
     {
-        Schema::dropIfExists('tauxes');
+        Schema::dropIfExists('taux');
     }
 };
