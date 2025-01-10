@@ -14,16 +14,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 
 use App\Http\Controllers\CompteController;
 
-Route::get('/login', [CompteController::class, 'index'])->name('login');
-Route::post('/login', [CompteController::class, 'authenticate'])->name('login.authenticate');
-Route::get('/register', [CompteController::class, 'create'])->name('register');
-Route::post('/register', [CompteController::class, 'store'])->name('register.store');
-Route::post('/logout', [CompteController::class, 'logout'])->name('logout');
+Route::prefix('/auth')->group(function () {
+    Route::get('/', [CompteController::class, 'index'])->name('login');
+    Route::post('/login', [CompteController::class, 'authenticate'])->name('login.authenticate');
+    Route::get('/register', [CompteController::class, 'create'])->name('register');
+    Route::post('/register', [CompteController::class, 'store'])->name('register.store');
+    Route::post('/logout', [CompteController::class, 'logout'])->name('logout');
+});
 
-Route::get('/dashboard', [CompteController::class, 'dashboard'])->middleware('auth')->name('dashboard');
+// Routes nécessitant l'authentification
+Route::middleware([''])->group(function () {
+    Route::get('/dashboard', [CompteController::class, 'dashboard'])->name('dashboard');
+});

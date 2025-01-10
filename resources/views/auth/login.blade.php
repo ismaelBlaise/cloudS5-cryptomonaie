@@ -12,6 +12,11 @@
                 <input type="email" id="email" name="email" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600" required autofocus>
             </div>
 
+            <div class="mb-4">
+                <label for="password" class="block text-sm font-medium text-gray-700">Mot de passe</label>
+                <input type="password" id="password" name="password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-600" required>
+            </div>
+
             <button type="submit" class="w-full py-2 px-4 bg-purple-600 text-white font-semibold rounded-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600">Se connecter</button>
         </form>
 
