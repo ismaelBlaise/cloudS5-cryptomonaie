@@ -1,0 +1,13 @@
+Plateforme web simplifié d’achat et de vente de cryptomonnaie
+inscription et connexion, profil (en utilisant le fournisseur d’identité)
+gestion de portefeuille de cryptomonnaie
+gestion de fond (depot /retrait) pour permettre l’achat de cryptomonnaie , avec validation par email
+la vente de cryptomonnaie se transforme en fond
+page contenant les cours en temps réel (mise à jour tous les 10secondes)
+
+
+Plateforme web simplifié d’achat et de vente de cryptomonnaie
+page d’évolution graphique d’un cryptomonnaie
+achat et vente de cryptomonnaie 
+page pour voir la liste des achats et ventes de tous les utilisateurs
+A vous de créer un module qui va générer aléatoirement le cours des cryptomonnaies  tous les 10 secondes (rester cohérent)
