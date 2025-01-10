@@ -17,7 +17,7 @@
                         </a>
                     </li>
                     <li class="p-4 hover:bg-purple-700">
-                        <a href="{{ route('transactions.venteForm')}}" class="flex items-center space-x-2">
+                        <a href="{{ route('transactions.choixForm')}}" class="flex items-center space-x-2">
                             <span class="material-icons">account_balance_wallet</span>
                             <span>Portefeuille</span>
                         </a>

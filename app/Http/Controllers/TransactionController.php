@@ -30,6 +30,10 @@ class TransactionController extends Controller
         return redirect()->route('transactions.depotForm')->with('success', 'Montant déposé avec succès.');
     }
 
+    public function choixForm()
+    {
+        return view('transactions.choix');
+    }
 
     public function venteForm()
     {

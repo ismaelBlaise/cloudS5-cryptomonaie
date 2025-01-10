@@ -46,3 +46,6 @@ Route::get('/transactions/echange', [TransactionController::class, 'echangeForm'
 Route::post('/transactions/echange', [TransactionController::class, 'echange'])->name('transactions.echange');
 
 
+Route::get('/transactions/choix', [TransactionController::class, 'choixForm'])->name('transactions.choixForm');
+
+
