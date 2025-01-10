@@ -47,11 +47,9 @@ class CompteController extends Controller
         // Validation des données
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|unique:compte,email',
-            'mot_de_passe' => 'required|min:8|confirmed',
             'nom' => 'required',
             'prenom' => 'required',
             'date_naissance' => 'required|date',
-            'sexe' => 'required|in:1,2,3',
         ]);
 
         if ($validator->fails()) {
@@ -67,16 +65,16 @@ class CompteController extends Controller
             'prenom' => $request->prenom,
             'date_naissance' => $request->date_naissance,
             'mot_de_passe' => Hash::make($request->mot_de_passe),
-            'sexe' => ['id' => $request->sexe],  // Utiliser l'ID du sexe
+            // 'sexe' => ['id' => $request->sexe],  // Utiliser l'ID du sexe
         ];
 
         // Envoi des données à l'API Spring Boot
-        $apiUrl = 'http://localhost:8080/utilisateur';
+        $apiUrl = 'http://localhost:8080/utilisateurs/inscrire';
         $response = Http::post($apiUrl, $dto);
 
         if ($response->ok()) {
             // Rediriger vers la page de validation de compte
-            return redirect()->route('validatercompte')->with('success', 'Inscription réussie ! Veuillez valider votre compte.');
+            return redirect()->route('validercompte')->with('success', 'Inscription réussie ! Veuillez valider votre compte.');
         }
 
         // Si l'API retourne une erreur, retourner le message d'erreur
@@ -103,8 +101,11 @@ class CompteController extends Controller
         ]);
 
         if ($response->ok()) {
-            // Stocker l'e-mail dans la session
+            // Stocker l'e-mail et le code PIN dans la session
+            $pin = $response->json()['pin'];  // Supposons que la réponse contient le PIN
             $request->session()->put('email', $credentials['email']);
+            $request->session()->put('pin', $pin);  // Stocker le PIN dans la session
+
             return redirect()->route('validatepin');
         }
 
@@ -113,6 +114,28 @@ class CompteController extends Controller
         ]);
     }
 
+
+    public function validerPin(Request $request)
+    {
+        // Vérifier si le code PIN est dans la session
+        $pinStored = $request->session()->get('pin');
+
+        // Valider le code PIN entré par l'utilisateur
+        $request->validate([
+            'pin' => 'required|digits:4',  // Supposons que le PIN soit un nombre à 4 chiffres
+        ]);
+
+        // Vérifier si le PIN correspond
+        if ($request->input('pin') == $pinStored) {
+            // Si le PIN est correct, rediriger vers le tableau de bord
+            return redirect()->route('dashboard');
+        }
+
+        // Si le PIN est incorrect, afficher un message d'erreur
+        return back()->withErrors([
+            'pin' => 'Le code PIN est incorrect.',
+        ]);
+    }
 
 
     /**

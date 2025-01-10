@@ -4,13 +4,24 @@
 <div class="flex items-center justify-center min-h-screen bg-gray-100">
     <div class="w-full max-w-sm bg-white p-6 rounded-lg shadow-md">
     <h2 class="text-2xl font-bold mb-4 text-center">Validation du Code PIN</h2>
-
+        @if ($errors->any())
+            <div class="mb-4">
+                <ul class="text-sm text-red-600">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <form method="POST" action="{{ route('login') }}">
             @csrf
             <div class="mb-4">
                     <input type="hidden" id="email" name="email" value="{{ session('email') }}">
                     <label for="codepin" class="block text-gray-700">Code PIN :</label>
                     <input type="number" id="codepin" name="codepin" class="w-full border border-gray-300 p-2 rounded" required>
+                    @error('codepin')
+                        <div class="text-sm text-red-600">{{ $message }}</div>
+                    @enderror
                 </div>
                 <button type="submit" class="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700">
                     Valider

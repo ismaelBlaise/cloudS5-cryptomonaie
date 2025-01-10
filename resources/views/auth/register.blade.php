@@ -47,9 +47,9 @@
                 <label for="sexe" class="block text-sm font-medium text-gray-600">Sexe</label>
                 <select id="sexe" name="Id_sexe" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:ring-gray-400" required>
                     <option value="">Sélectionnez</option>
-                    <option value="1" {{ old('Id_sexe') == '1' ? 'selected' : '' }}>Homme</option>
-                    <option value="2" {{ old('Id_sexe') == '2' ? 'selected' : '' }}>Femme</option>
-                    <option value="3" {{ old('Id_sexe') == '3' ? 'selected' : '' }}>Autre</option>
+                    <option value="1" >Homme</option>
+                    <option value="2">Femme</option>
+                    <option value="3" >Autre</option>
                 </select>
             </div>
 

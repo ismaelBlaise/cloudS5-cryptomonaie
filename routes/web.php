@@ -28,6 +28,7 @@ Route::prefix('/auth')->group(function () {
     Route::get('/logout', [CompteController::class, 'logout'])->name('logout');
     Route::get('/dashboard', [CompteController::class, 'dashboard'])->name('dashboard');
     Route::get('/validate-pin', [CompteController::class, 'validatePin'])->name('validatepin');
+    Route::get('/valider-pin', [CompteController::class, 'validerPin'])->name('validerpin');
     Route::get('/validate-account', [CompteController::class, 'validateCompte'])->name('validatecompte');
 });
 
