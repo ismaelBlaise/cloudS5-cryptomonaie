@@ -21,14 +21,14 @@ Route::get('/', function () {
 use App\Http\Controllers\CompteController;
 
 Route::prefix('/auth')->group(function () {
-    Route::get('/', [CompteController::class, 'index'])->name('login');
+    Route::get('/login', [CompteController::class, 'index'])->name('login');
     Route::post('/login', [CompteController::class, 'authenticate'])->name('login.authenticate');
     Route::get('/register', [CompteController::class, 'create'])->name('register');
     Route::post('/register', [CompteController::class, 'store'])->name('register.store');
-    Route::post('/logout', [CompteController::class, 'logout'])->name('logout');
+    Route::get('/logout', [CompteController::class, 'logout'])->name('logout');
+    Route::get('/dashboard', [CompteController::class, 'dashboard'])->name('dashboard');
+    Route::get('/validate-pin', [CompteController::class, 'validatePin'])->name('validatepin');
+    Route::get('/validate-account', [CompteController::class, 'validateCompte'])->name('validatecompte');
 });
 
-// Routes nécessitant l'authentification
-Route::middleware([''])->group(function () {
-    Route::get('/dashboard', [CompteController::class, 'dashboard'])->name('dashboard');
-});
+

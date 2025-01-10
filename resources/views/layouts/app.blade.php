@@ -16,7 +16,7 @@
 <body class="font-sans bg-gray-100">
 
     <!-- Barre de navigation -->
-    <!-- <nav class="bg-purple-600 shadow-md p-4">
+    <nav class="bg-purple-600 shadow-md p-4">
         <div class="max-w-7xl mx-auto flex justify-between items-center">
             <a href="/" class="text-white text-2xl font-bold">CryptoPlateforme</a>
             <div>
@@ -29,7 +29,7 @@
                 @endauth
             </div>
         </div>
-    </nav> -->
+    </nav>
 
     <!-- Contenu principal -->
     <div class="min-h-screen">

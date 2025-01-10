@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Http;
+
 
 class CompteController extends Controller
 {
@@ -27,6 +29,16 @@ class CompteController extends Controller
         return view('auth.register');
     }
 
+    public function validatePin()
+    {
+        return view('auth.validerpin');
+    }
+
+    public function validateCompte()
+    {
+        return view('auth.validercompte');
+    }
+
     /**
      * Enregistre un nouvel utilisateur.
      */
@@ -34,26 +46,43 @@ class CompteController extends Controller
     {
         // Validation des données
         $validator = Validator::make($request->all(), [
-            'email' => 'required|email|unique:comptes,email',
-            'password' => 'required|min:8|confirmed',
+            'email' => 'required|email|unique:compte,email',
+            'mot_de_passe' => 'required|min:8|confirmed',
+            'nom' => 'required',
+            'prenom' => 'required',
+            'date_naissance' => 'required|date',
+            'sexe' => 'required|in:1,2,3',
         ]);
 
         if ($validator->fails()) {
             return redirect()->route('register')
-                             ->withErrors($validator)
-                             ->withInput();
+                            ->withErrors($validator)
+                            ->withInput();
         }
 
-        // Création du compte
-        $compte = new Compte;
-        $compte->email = $request->email;
-        $compte->password = Hash::make($request->password);  // Hachage du mot de passe
-        $compte->save();
+        // Création du DTO UtilisateurDTO
+        $dto = [
+            'email' => $request->email,
+            'nom' => $request->nom,
+            'prenom' => $request->prenom,
+            'date_naissance' => $request->date_naissance,
+            'mot_de_passe' => Hash::make($request->mot_de_passe),
+            'sexe' => ['id' => $request->sexe],  // Utiliser l'ID du sexe
+        ];
 
-        // Enregistrement réussi, redirection vers la page de connexion
-        event(new Registered($compte));
+        // Envoi des données à l'API Spring Boot
+        $apiUrl = 'http://localhost:8080/utilisateur';
+        $response = Http::post($apiUrl, $dto);
 
-        return redirect()->route('login')->with('success', 'Inscription réussie ! Veuillez vous connecter.');
+        if ($response->ok()) {
+            // Rediriger vers la page de validation de compte
+            return redirect()->route('validatercompte')->with('success', 'Inscription réussie ! Veuillez valider votre compte.');
+        }
+
+        // Si l'API retourne une erreur, retourner le message d'erreur
+        return redirect()->route('register')->withErrors([
+            'error' => $response->body() ?? 'Erreur lors de l\'inscription.',
+        ]);
     }
 
     /**
@@ -61,21 +90,30 @@ class CompteController extends Controller
      */
     public function authenticate(Request $request)
     {
-        // Validation des données
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('dashboard');
+        // Requête vers l'API Spring Boot
+        $apiUrl = 'http://localhost:8080/utilisateurs/connexion';
+        $response = Http::post($apiUrl, [
+            'email' => $credentials['email'],
+            'motDePasse' => $credentials['password'],
+        ]);
+
+        if ($response->ok()) {
+            // Stocker l'e-mail dans la session
+            $request->session()->put('email', $credentials['email']);
+            return redirect()->route('validatepin');
         }
 
         return back()->withErrors([
-            'email' => 'Les identifiants fournis sont incorrects.',
+            'email' => $response->body() ?? 'Erreur lors de la connexion.',
         ]);
     }
+
+
 
     /**
      * Affiche le tableau de bord après connexion.
