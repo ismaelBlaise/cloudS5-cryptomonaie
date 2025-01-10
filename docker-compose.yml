@@ -28,6 +28,59 @@ services:
     volumes:
       - postgres_data:/var/lib/postgresql/data
       - ./docker/postgres:/docker-entrypoint-initdb.d 
+ laravel-app:
+    build:
+      context: ./cloudS5-cryptomonaie
+    container_name: laravel_app
+    environment:
+      DB_CONNECTION: postgres
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_DATABASE: fournisseurapi
+      DB_USERNAME: fournisseurapi
+      DB_PASSWORD: fournisseurapi
+    ports:
+      - "8000:80"  # Laravel sera disponible sur http://localhost:8000
+    depends_on:
+      - postgres
+    volumes:
+      - ./cloudS5-cryptomonaie:/var/www/html
+    networks:
+      - backend_network
+
+
+  postgres-laravel:
+    image: postgres:15
+    container_name: postgres_laravel_container
+    environment:
+      POSTGRES_DB: cryptomonnaie_db  # Base de données pour Laravel
+      POSTGRES_USER: laraveluser  # Utilisateur pour Laravel
+      POSTGRES_PASSWORD: laravelpassword  # Mot de passe pour Laravel
+    ports:
+      - "5434:5432"  # Port 5434 pour Laravel
+    volumes:
+      - postgres_laravel_data:/var/lib/postgresql/data
+      - ./docker/postgres:/docker-entrypoint-initdb.d
+
+  # Service Nginx pour Laravel
+  nginx:
+    image: nginx:1.23
+    container_name: laravel_nginx
+    restart: unless-stopped
+    ports:
+      - "8000:80"
+    volumes:
+      - ./cloudS5-cryptomonaie:/var/www/html
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - laravel-app
+    networks:
+      - backend_network
+
+networks:
+  backend_network:
+    driver: bridge
+
 volumes:
   postgres_data:
     driver: local
