@@ -13,7 +13,7 @@
                 </ul>
             </div>
         @endif
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('validerpin') }}">
             @csrf
             <div class="mb-4">
                     <input type="hidden" id="email" name="email" value="{{ session('email') }}">

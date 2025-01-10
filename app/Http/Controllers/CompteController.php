@@ -74,7 +74,7 @@ class CompteController extends Controller
 
         if ($response->ok()) {
             // Rediriger vers la page de validation de compte
-            return redirect()->route('validercompte')->with('success', 'Inscription réussie ! Veuillez valider votre compte.');
+            return redirect()->route('validatepin')->with('success', 'Inscription réussie ! Veuillez valider votre compte.');
         }
 
         // Si l'API retourne une erreur, retourner le message d'erreur
