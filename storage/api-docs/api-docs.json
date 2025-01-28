@@ -1,0 +1,647 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Utilisateur API",
+        "version": "1.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost/api"
+        }
+    ],
+    "paths": {
+        "/valider-token": {
+            "get": {
+                "summary": "Valider un token",
+                "description": "Permet de valider un token envoyé pour vérifier son authenticité.",
+                "operationId": "7768bddb00fb5e8875cd5282eaee53aa",
+                "parameters": [
+                    {
+                        "name": "token",
+                        "in": "query",
+                        "required": true,
+                        "schema": {
+                            "type": "string",
+                            "example": "exampleToken12345"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Token valide",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token valide."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Token expiré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token expiré. Veuillez vous reconnecter."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/utilisateur": {
+            "post": {
+                "summary": "Créer un utilisateur",
+                "description": "Crée un nouvel utilisateur dans le système.",
+                "operationId": "23286114a093f3a8f89dc0da36851332",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "nom",
+                                    "prenom",
+                                    "date_naissance",
+                                    "mot_de_passe",
+                                    "etat",
+                                    "nb_tentative",
+                                    "id_sexe"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Dupont"
+                                    },
+                                    "prenom": {
+                                        "type": "string",
+                                        "example": "Jean"
+                                    },
+                                    "date_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "etat": {
+                                        "type": "boolean",
+                                        "example": true
+                                    },
+                                    "nb_tentative": {
+                                        "type": "integer",
+                                        "example": 0
+                                    },
+                                    "id_sexe": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Utilisateur créé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "example": "user@example.com"
+                                        },
+                                        "nom": {
+                                            "type": "string",
+                                            "example": "Dupont"
+                                        },
+                                        "prenom": {
+                                            "type": "string",
+                                            "example": "Jean"
+                                        },
+                                        "date_naissance": {
+                                            "type": "string",
+                                            "example": "1990-01-01"
+                                        },
+                                        "mot_de_passe": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "etat": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "nb_tentative": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "id_sexe": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/utilisateur/{id}": {
+            "put": {
+                "summary": "Mettre à jour un utilisateur",
+                "description": "Met à jour un utilisateur avec de nouvelles informations.",
+                "operationId": "57ee01d520bae85247391e85b262b07a",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "example": 1
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Dupont"
+                                    },
+                                    "prenom": {
+                                        "type": "string",
+                                        "example": "Jean"
+                                    },
+                                    "date_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "id_sexe": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur mis à jour avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "email": {
+                                            "type": "string",
+                                            "example": "user@example.com"
+                                        },
+                                        "nom": {
+                                            "type": "string",
+                                            "example": "Dupont"
+                                        },
+                                        "prenom": {
+                                            "type": "string",
+                                            "example": "Jean"
+                                        },
+                                        "date_naissance": {
+                                            "type": "string",
+                                            "example": "1990-01-01"
+                                        },
+                                        "mot_de_passe": {
+                                            "type": "string",
+                                            "example": ""
+                                        },
+                                        "etat": {
+                                            "type": "boolean",
+                                            "example": true
+                                        },
+                                        "nb_tentative": {
+                                            "type": "integer",
+                                            "example": 0
+                                        },
+                                        "id_sexe": {
+                                            "type": "integer",
+                                            "example": 1
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "403": {
+                        "description": "Session expirée"
+                    }
+                }
+            }
+        },
+        "/inscrire-utilisateur": {
+            "post": {
+                "summary": "Inscrire un utilisateur",
+                "description": "Inscrit un utilisateur dans le système en envoyant un lien de validation.",
+                "operationId": "b23abd1002d0bb081c1321aed14ab77b",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "nom",
+                                    "prenom",
+                                    "date_naissance",
+                                    "mot_de_passe",
+                                    "sexe"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "nom": {
+                                        "type": "string",
+                                        "example": "Dupont"
+                                    },
+                                    "prenom": {
+                                        "type": "string",
+                                        "example": "Jean"
+                                    },
+                                    "date_naissance": {
+                                        "type": "string",
+                                        "format": "date",
+                                        "example": "1990-01-01"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    },
+                                    "sexe": {
+                                        "type": "integer",
+                                        "example": 1
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Utilisateur inscrit avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "url": {
+                                            "type": "string",
+                                            "example": "http://example.com/validate"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur de validation"
+                    }
+                }
+            }
+        },
+        "/connexion": {
+            "post": {
+                "summary": "Se connecter à un utilisateur",
+                "description": "Vérifie les informations d'identification d'un utilisateur et envoie un code PIN pour la vérification.",
+                "operationId": "a4c902bb0447d63a93c1432ebf2120ed",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "mot_de_passe"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "user@example.com"
+                                    },
+                                    "mot_de_passe": {
+                                        "type": "string",
+                                        "example": "password123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Code PIN envoyé pour la vérification",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "code": {
+                                            "type": "string",
+                                            "example": "123456"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Utilisateur introuvable ou erreur d'authentification",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Utilisateur introuvable."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Mauvais format ou données manquantes",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Données invalides."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/valider-compte": {
+            "post": {
+                "summary": "Valider un compte utilisateur",
+                "description": "Permet de valider le compte d'un utilisateur en utilisant un token d'activation.",
+                "operationId": "507cd0f5990710a1bff3e169c0f308bb",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "12345abcd-token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Compte validé avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Compte validé avec succès !"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur lors de la validation du compte",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token invalide ou expiré."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/reinitialiser-tentative": {
+            "post": {
+                "summary": "Réinitialiser le nombre de tentatives de connexion",
+                "description": "Permet de réinitialiser le nombre de tentatives de connexion d'un utilisateur en utilisant un token d'activation.",
+                "operationId": "7de247d260ec1646fa5e46ea70d8267e",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "token"
+                                ],
+                                "properties": {
+                                    "token": {
+                                        "type": "string",
+                                        "example": "12345abcd-token"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Tentatives réinitialisées avec succès",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Tentatives réinitialisées avec succès !"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erreur lors de la réinitialisation des tentatives",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Token invalide ou expiré."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/validation-pin": {
+            "post": {
+                "summary": "Valider le code PIN",
+                "description": "Permet de valider le code PIN envoyé à l'utilisateur pour l'authentification.",
+                "operationId": "483d7697258888a6913f4aca9cc9f3b8",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "email",
+                                    "codepin"
+                                ],
+                                "properties": {
+                                    "email": {
+                                        "type": "string",
+                                        "example": "utilisateur@exemple.com"
+                                    },
+                                    "codepin": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Validation réussie du code PIN",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "tokens": {
+                                            "type": "string",
+                                            "example": "newToken12345"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Code PIN non valide ou expiré",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Code PIN non valide ou expiré"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Erreur de validation (erreur interne ou code PIN incorrect)",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Code PIN non valide ou expiré"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "TokenController": {
+                "description": "Contrôleur pour gérer la validation des tokens",
+                "properties": {
+                    "tokenService": {
+                        "description": "Service de gestion des tokens",
+                        "type": "object"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    },
+    "tags": []
+}
