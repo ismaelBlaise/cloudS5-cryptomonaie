@@ -16,6 +16,7 @@ class Utilisateur extends Model
     protected $primaryKey = 'id_utilisateurs';
 
      
+    public $incrementing = true;
     protected $fillable = [
         'email',
         'nom',

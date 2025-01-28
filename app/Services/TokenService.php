@@ -21,7 +21,7 @@ class TokenService
         $tokenStr = Str::uuid()->toString();  
         $token = new Token();
         $token->token = $tokenStr;
-        $token->id_utilisateurs = $utilisateur->id;
+        $token->id_utilisateurs = $utilisateur->id_utilisateurs;
         $token->date_expiration = now()->addMinutes(1);   
         $token->save();
 

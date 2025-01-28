@@ -126,7 +126,7 @@ class UtilisateurController extends Controller
                 Carbon::parse($data['date_naissance']),
                 Hash::make($data['mot_de_passe']),  
                 $data['etat'],
-                $data['nb_tentative'],
+                $this->utilisateurService->getMaxAttempts(),
                 $sexeDTO
             );
 
@@ -140,7 +140,8 @@ class UtilisateurController extends Controller
 
             
             $utilisateur = $utilisateurDTO->toUtilisateur();
-            $utilisateur->sexes()->associate($sexe);
+            
+            $utilisateur->sexe()->associate($sexe);
             $utilisateur->save();
 
             
@@ -236,7 +237,7 @@ class UtilisateurController extends Controller
      * Inscrit un utilisateur dans le système.
      *
      * @OA\Post(
-     *     path="/utilisateurs/inscrire-utilisateur",
+     *     path="/utilisateurs/inscrire",
      *     summary="Inscrire un utilisateur",
      *     description="Inscrit un utilisateur dans le système en envoyant un lien de validation.",
      *     @OA\RequestBody(
@@ -274,7 +275,7 @@ class UtilisateurController extends Controller
                 'prenom' => 'required|string|max:255',
                 'date_naissance' => 'required|date|before:today',  
                 'mot_de_passe' => 'required|string|min:8', 
-                'sexe' => 'required|integer|exists:sexes,id',  
+                'sexe' => 'required|integer|exists:sexes,id_sexe',  
             ]);
 
              
@@ -282,7 +283,7 @@ class UtilisateurController extends Controller
 
  
             $utilisateurDTO = new UtilisateurDTO(
-                0,  
+                12,  
                 $validatedData['email'],
                 $validatedData['nom'],
                 $validatedData['prenom'],

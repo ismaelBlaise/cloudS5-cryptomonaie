@@ -31,6 +31,9 @@ Route::prefix('utilisateurs')->group(function () {
 });
 
 
+Route::get('/test', function () {
+    return response()->json(['message' => 'API fonctionne']);
+});
 
 use App\Http\Controllers\TokenController;
 

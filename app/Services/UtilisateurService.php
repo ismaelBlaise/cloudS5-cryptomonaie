@@ -26,10 +26,9 @@ class UtilisateurService
 {
     private $tokenService;
 
-    public function __construct(
-       
-    ) {
-       $tokenService=new TokenService();
+    public function __construct(TokenService $tokenService)
+    {
+        $this->tokenService = $tokenService;  
     }
 
     public function save(UtilisateurDTO $data)
@@ -273,7 +272,7 @@ class UtilisateurService
         return null;
     }
 
-    protected function getMaxAttempts()
+    public function getMaxAttempts()
     {
         $conf = Configuration::where('cle','nbtentative')->first();
         return (int)$conf->valeur;
