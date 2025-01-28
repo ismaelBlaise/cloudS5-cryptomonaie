@@ -50,7 +50,7 @@ class UtilisateurController extends Controller
      * Crée un nouvel utilisateur.
      *
      * @OA\Post(
-     *     path="/utilisateur",
+     *     path="/utilisateurs",
      *     summary="Créer un utilisateur",
      *     description="Crée un nouvel utilisateur dans le système.",
      *     @OA\RequestBody(
@@ -161,7 +161,7 @@ class UtilisateurController extends Controller
      * Met à jour un utilisateur existant.
      *
      * @OA\Put(
-     *     path="/utilisateur/{id}",
+     *     path="/utilisateurs/{id}",
      *     summary="Mettre à jour un utilisateur",
      *     description="Met à jour un utilisateur avec de nouvelles informations.",
      *     @OA\Parameter(
@@ -236,7 +236,7 @@ class UtilisateurController extends Controller
      * Inscrit un utilisateur dans le système.
      *
      * @OA\Post(
-     *     path="/inscrire-utilisateur",
+     *     path="/utilisateurs/inscrire-utilisateur",
      *     summary="Inscrire un utilisateur",
      *     description="Inscrit un utilisateur dans le système en envoyant un lien de validation.",
      *     @OA\RequestBody(
@@ -310,7 +310,7 @@ class UtilisateurController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/connexion",
+     *     path="/utilisateurs/connexion",
      *     summary="Se connecter à un utilisateur",
      *     description="Vérifie les informations d'identification d'un utilisateur et envoie un code PIN pour la vérification.",
      *     @OA\RequestBody(
@@ -364,7 +364,7 @@ class UtilisateurController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/valider-compte",
+     *     path="/utilisateurs/valider-compte",
      *     summary="Valider un compte utilisateur",
      *     description="Permet de valider le compte d'un utilisateur en utilisant un token d'activation.",
      *     @OA\RequestBody(
@@ -402,7 +402,7 @@ class UtilisateurController extends Controller
 
     /**
      * @OA\Post(
-     *     path="/reinitialiser-tentative",
+     *     path="/utilisateurs/reinitialiser-tentative",
      *     summary="Réinitialiser le nombre de tentatives de connexion",
      *     description="Permet de réinitialiser le nombre de tentatives de connexion d'un utilisateur en utilisant un token d'activation.",
      *     @OA\RequestBody(
@@ -442,7 +442,7 @@ class UtilisateurController extends Controller
     
     /**
      * @OA\Post(
-     *     path="/validation-pin",
+     *     path="/utilisateurs/validation-pin",
      *     summary="Valider le code PIN",
      *     description="Permet de valider le code PIN envoyé à l'utilisateur pour l'authentification.",
      *     @OA\RequestBody(

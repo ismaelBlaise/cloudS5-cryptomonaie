@@ -10,11 +10,11 @@
         }
     ],
     "paths": {
-        "/valider-token": {
+        "/tokens/valider-token": {
             "get": {
                 "summary": "Valider un token",
                 "description": "Permet de valider un token envoyé pour vérifier son authenticité.",
-                "operationId": "7768bddb00fb5e8875cd5282eaee53aa",
+                "operationId": "c611b1ffeabd01759422408d140e313e",
                 "parameters": [
                     {
                         "name": "token",
@@ -62,11 +62,11 @@
                 }
             }
         },
-        "/utilisateur": {
+        "/utilisateurs": {
             "post": {
                 "summary": "Créer un utilisateur",
                 "description": "Crée un nouvel utilisateur dans le système.",
-                "operationId": "23286114a093f3a8f89dc0da36851332",
+                "operationId": "90475ae6f2f66546b4d34fde91ffcca5",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -173,11 +173,11 @@
                 }
             }
         },
-        "/utilisateur/{id}": {
+        "/utilisateurs/{id}": {
             "put": {
                 "summary": "Mettre à jour un utilisateur",
                 "description": "Met à jour un utilisateur avec de nouvelles informations.",
-                "operationId": "57ee01d520bae85247391e85b262b07a",
+                "operationId": "a8b653d914618ceb46ea741708d16fd1",
                 "parameters": [
                     {
                         "name": "id",
@@ -273,11 +273,11 @@
                 }
             }
         },
-        "/inscrire-utilisateur": {
+        "/utilisateurs/inscrire-utilisateur": {
             "post": {
                 "summary": "Inscrire un utilisateur",
                 "description": "Inscrit un utilisateur dans le système en envoyant un lien de validation.",
-                "operationId": "b23abd1002d0bb081c1321aed14ab77b",
+                "operationId": "9dd9be9d6181efbaa6bce0fe9544b1c8",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -346,11 +346,11 @@
                 }
             }
         },
-        "/connexion": {
+        "/utilisateurs/connexion": {
             "post": {
                 "summary": "Se connecter à un utilisateur",
                 "description": "Vérifie les informations d'identification d'un utilisateur et envoie un code PIN pour la vérification.",
-                "operationId": "a4c902bb0447d63a93c1432ebf2120ed",
+                "operationId": "47bc2b8de65a3a84a8b6a26cf59dff9c",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -427,11 +427,11 @@
                 }
             }
         },
-        "/valider-compte": {
+        "/utilisateurs/valider-compte": {
             "post": {
                 "summary": "Valider un compte utilisateur",
                 "description": "Permet de valider le compte d'un utilisateur en utilisant un token d'activation.",
-                "operationId": "507cd0f5990710a1bff3e169c0f308bb",
+                "operationId": "a37d5eff24821fe93b7a519cf5d75339",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -487,11 +487,11 @@
                 }
             }
         },
-        "/reinitialiser-tentative": {
+        "/utilisateurs/reinitialiser-tentative": {
             "post": {
                 "summary": "Réinitialiser le nombre de tentatives de connexion",
                 "description": "Permet de réinitialiser le nombre de tentatives de connexion d'un utilisateur en utilisant un token d'activation.",
-                "operationId": "7de247d260ec1646fa5e46ea70d8267e",
+                "operationId": "92a38229193633845cccb11eeda6d65d",
                 "requestBody": {
                     "required": true,
                     "content": {
@@ -547,11 +547,11 @@
                 }
             }
         },
-        "/validation-pin": {
+        "/utilisateurs/validation-pin": {
             "post": {
                 "summary": "Valider le code PIN",
                 "description": "Permet de valider le code PIN envoyé à l'utilisateur pour l'authentification.",
-                "operationId": "483d7697258888a6913f4aca9cc9f3b8",
+                "operationId": "8dfdd0ca18350e2fb273699b84ef6c91",
                 "requestBody": {
                     "required": true,
                     "content": {
