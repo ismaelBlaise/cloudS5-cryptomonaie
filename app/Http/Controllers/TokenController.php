@@ -83,7 +83,7 @@ class TokenController extends Controller
      * Cette méthode permet de valider un token envoyé par l'utilisateur pour s'assurer qu'il est toujours valide.
      *
      * @OA\Get(
-     *     path="/valider-token",
+     *     path="/tokens/valider-token",
      *     summary="Valider un token",
      *     description="Permet de valider un token envoyé pour vérifier son authenticité.",
      *     @OA\Parameter(
